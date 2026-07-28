@@ -84,3 +84,56 @@ button:active {
   text-align: center;
   margin: 0 0.5rem;
 }
+
+#gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  #gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  #gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.monster-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.monster-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.monster-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.monster-card h3 {
+  color: #ff0062;
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.monster-card p {
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
