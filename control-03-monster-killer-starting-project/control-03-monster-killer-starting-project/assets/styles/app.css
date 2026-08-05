@@ -84,3 +84,166 @@ button:active {
   text-align: center;
   margin: 0 0.5rem;
 }
+
+/* ===== Home Page: Site Header ===== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: #1a1a1a;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.site-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff0062;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ===== Home Page: Main Navigation ===== */
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.main-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease-out;
+}
+
+.main-nav a:hover,
+.main-nav a:active,
+.main-nav a:focus {
+  color: #a927f5;
+  outline: none;
+}
+
+/* ===== Home Page: Hero Section ===== */
+
+.hero {
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1rem;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #3d1a3d 100%);
+  box-sizing: border-box;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0 0 1.5rem 0;
+  background: linear-gradient(90deg, #ff0062, #a927f5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ff0062;
+  line-height: 1.2;
+}
+
+.hero-description {
+  color: #d0d0d0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+}
+
+.hero-cta {
+  display: inline-block;
+  background: #ff0062;
+  border: 2px solid #ff0062;
+  color: white;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 1rem 2.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.hero-cta:hover,
+.hero-cta:active,
+.hero-cta:focus {
+  background: #a927f5;
+  border-color: #a927f5;
+  outline: none;
+}
+
+/* ===== Home Page: Game Section Wrapper ===== */
+
+#game {
+  padding: 2rem 1rem;
+  margin: 0 auto;
+}
+
+/* ===== Home Page: Site Footer ===== */
+
+.site-footer {
+  background: #1a1a1a;
+  color: #a0a0a0;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+.site-footer p {
+  margin: 0.5rem 0;
+}
+
+/* ===== Responsive: Small Screens ===== */
+
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .main-nav {
+    gap: 1rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .hero-cta {
+    font-size: 1.1rem;
+    padding: 0.85rem 2rem;
+  }
+
+  #health-levels,
+  #controls {
+    width: 90%;
+  }
+}
+

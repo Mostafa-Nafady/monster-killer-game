@@ -10,26 +10,45 @@
     <script src="assets/scripts/app.js" defer></script>
   </head>
   <body>
-    <section id="health-levels">
-      <h2>MONSTER HEALTH</h2>
-      <progress id="monster-health" max="100" value="100">100%</progress>
-      <h2>PLAYER HEALTH<span id="bonus-life">1</span></h2>
-      <progress id="player-health" max="100" value="100">100%</progress>
+    <header class="site-header">
+      <div class="site-title">MONSTER KILLER</div>
+      <nav class="main-nav">
+        <a href="about.html">About</a>
+        <a href="sdv.html">SDV</a>
+        <a href="yuy.html">YUY</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="hero">
+      <h1 class="hero-title">MONSTER KILLER</h1>
+      <p class="hero-description">Battle fearsome monsters in this turn-based combat game. Attack, heal, and outsmart your enemy to survive!</p>
+      <a href="#game" class="hero-cta">PLAY NOW</a>
     </section>
-    <section id="controls">
-      <button id="attack-btn">ATTACK</button>
-      <button id="strong-attack-btn">STRONG ATTACK</button>
-      <button id="heal-btn">HEAL</button>
-      <button id="log-btn">SHOW LOG</button>
-      <a href="about.html"><button>ABOUT</button></a>
-      <a href="sdv.html"><button>SDV</button></a>
-      <a href="yuy.html"><button>YUY</button></a>
+
+    <section id="game" class="game-section">
+      <section id="health-levels">
+        <h2>MONSTER HEALTH</h2>
+        <progress id="monster-health" max="100" value="100">100%</progress>
+        <h2>PLAYER HEALTH<span id="bonus-life">1</span></h2>
+        <progress id="player-health" max="100" value="100">100%</progress>
+      </section>
+      <section id="controls">
+        <button id="attack-btn">ATTACK</button>
+        <button id="strong-attack-btn">STRONG ATTACK</button>
+        <button id="heal-btn">HEAL</button>
+        <button id="log-btn">SHOW LOG</button>
+        <a href="about.html"><button>ABOUT</button></a>
+        <a href="sdv.html"><button>SDV</button></a>
+        <a href="yuy.html"><button>YUY</button></a>
+      </section>
     </section>
-   <!--  <section>
-      <progress max="100" value="80">100%</progress>
-    </section> -->
+
+    <footer class="site-footer">
+      <p>© 2026 Monster Killer Game</p>
+    </footer>
   </body>
 </html>
+
 
 
 
