@@ -119,3 +119,17 @@ attackBtn.addEventListener('click', attackHandeler);
 strongAttackBtn.addEventListener('click', strongAttack);
 healBtn.addEventListener('click', anotherTry );
 logBtn.addEventListener('click',eventLog);
+
+/* scroll progress tracker */
+const scrollTracker = document.getElementById('scroll-tracker');
+
+function updateScrollTracker() {
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrollPercent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+  scrollTracker.style.width = scrollPercent + '%';
+}
+
+window.addEventListener('scroll', updateScrollTracker);
+window.addEventListener('resize', updateScrollTracker);
+updateScrollTracker();

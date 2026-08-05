@@ -84,3 +84,16 @@ button:active {
   text-align: center;
   margin: 0 0.5rem;
 }
+
+#scroll-tracker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: #ff0062;
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 4px #a927f5;
+}
+
