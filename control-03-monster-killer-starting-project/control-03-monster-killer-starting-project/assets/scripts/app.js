@@ -1,121 +1,264 @@
+/**
+ * Whisker & Co. — Cat Accessories Landing Page
+ * Vanilla JS interactivity: mobile menu, add-to-cart, smooth scroll,
+ * newsletter validation, dynamic footer year, and scroll-spy nav highlighting.
+ *
+ * Wrapped in DOMContentLoaded so all elements are guaranteed to exist
+ * before we query them (the script tag already has `defer`, but this is
+ * a belt-and-suspenders safety measure).
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  'use strict';
 
-/* to make user enter the health value */
-const enteredPlayerValue= parseInt( prompt('please enter the player health value '));
-/* this variable to holds the entered value */
-let choosenHealthValue= enteredPlayerValue;
+  /* =========================================================
+   * 1. ELEMENT REFERENCES
+   * Cache DOM nodes up-front for performance and readability.
+   * ========================================================= */
+  const menuToggle  = document.getElementById('menu-toggle');
+  const navLinks    = document.getElementById('nav-links');
+  const cartBtn     = document.getElementById('cart-btn');
+  const cartCount   = document.getElementById('cart-count');
+  const newsletterForm    = document.getElementById('newsletter-form');
+  const newsletterEmail   = document.getElementById('newsletter-email');
+  const newsletterMessage = document.getElementById('newsletter-message');
+  const currentYearEl     = document.getElementById('current-year');
 
-/* to force adjust out of range enterde value from 0 to 100 */
-/* isNaN builtin function to check if it NaN value */
-/* isNaN yeilds a true if the value was NaN */
-if( isNaN(enteredPlayerValue) || enteredPlayerValue<=0 || enteredPlayerValue>100){
-    choosenHealthValue=100; // force adjust the entered number to 100
-}
+  /* Running cart total kept in a variable so we don't rely solely on
+     parsing the DOM text on every click. */
+  let cartTotal = 0;
 
+  /* =========================================================
+   * 2. MOBILE MENU TOGGLE
+   * Toggles the `nav-open` class on both the nav-links container and
+   * the hamburger button, and updates `aria-expanded` for screen readers.
+   * ========================================================= */
+  const toggleMobileMenu = (forceOpen) => {
+    if (!menuToggle || !navLinks) return;
 
-let normalAttack=1;
-let extremAttack=20;
-let playerDamageValue=12;
+    // Determine target state: explicit override or flip current state.
+    const willOpen = typeof forceOpen === 'boolean'
+      ? forceOpen
+      : !navLinks.classList.contains('nav-open');
 
-let currentMonsterHealth=choosenHealthValue;
-let currentPlayerHealth=choosenHealthValue;
+    navLinks.classList.toggle('nav-open', willOpen);
+    menuToggle.classList.toggle('nav-open', willOpen);
+    menuToggle.setAttribute('aria-expanded', String(willOpen));
+  };
 
-let monsterDamage;
-let playerDamage;
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => toggleMobileMenu());
+  }
 
-let anotherPlayerHealth=100;
-let resetValue=100;
-let tries=1;
-let logEnteryContent=[];
+  /* Close the mobile menu when any nav link is clicked so the menu
+     collapses after navigation on small screens. */
+  if (navLinks) {
+    navLinks.addEventListener('click', (e) => {
+      if (e.target.closest('a')) {
+        toggleMobileMenu(false);
+      }
+    });
+  }
 
+  /* =========================================================
+   * 3. ADD TO CART (event delegation)
+   * A single delegated listener on the document handles every
+   * `.add-to-cart-btn` click. Increments the badge and provides
+   * visual feedback: a bounce on the cart button + a temporary
+   * "Added!" label on the clicked button.
+   * ========================================================= */
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.add-to-cart-btn');
+    if (!btn) return;
 
-const STRONG_ATTACk="STRONG_ATTACK";
-const NORMAL_ATTACK="NORMAL_ATTACK";
-const PLAYER_HEAL="PLAYER_HEAL";
-
-
-
-
-/* to set the healthbar values */
-adjustHealthBars(choosenHealthValue);
-
-/* any attack function */
-function attackAnyMode(attackValue){
-    /* Both are alive */
-    if((currentMonsterHealth >0) && ( currentPlayerHealth  >0)) {
-        monsterDamage=dealMonsterDamage(attackValue);
-        playerDamage=dealPlayerDamage(playerDamageValue);
-        currentPlayerHealth-= playerDamage;
-        currentMonsterHealth-= monsterDamage;
-        /* monster died */
-    }else if(( currentMonsterHealth <=0) && (currentPlayerHealth > 0)){
-        alert('you are won!');
-        reset();
-         /* record player_win event */
-        logEnteryContent.push("reset_flag::player win");
-        /* player died */
-    }else if ((( currentMonsterHealth >0) && (currentPlayerHealth <= 0))){
-        alert('sorry you lose');
-        reset();
-        /* record monster_win event */
-        logEnteryContent.push("reset_flag::monster win");
-}else if (currentMonsterHealth <=0 && currentPlayerHealth <= 0){
-    alert('the game was draw!!!')
-    reset();
-    /* record the draw event */
-    logEnteryContent.push("reset_flag::nobody win");
-}
-}
-/* reset the game */
- function reset(){
-    choosenHealthValue=100;
-    adjustHealthBars(choosenHealthValue);
-     currentMonsterHealth=choosenHealthValue;
-     currentPlayerHealth=choosenHealthValue;
-     resetGame(resetValue) ;
- }
-
-/* normal attack function */
-function attackHandeler(){
-    attackAnyMode(normalAttack);
-    writeEventLog(NORMAL_ATTACK,"player",monsterDamage,currentMonsterHealth,currentPlayerHealth);
+    // Increment running total and update the badge.
+    cartTotal += 1;
+    if (cartCount) {
+      cartCount.textContent = String(cartTotal);
     }
 
-/* strong attack function */
-function strongAttack(){
-    attackAnyMode(extremAttack);
-    writeEventLog(STRONG_ATTACk,"player",monsterDamage,currentMonsterHealth,currentPlayerHealth);
-}
-/* player another chance */
-function anotherTry(){
-    if(tries!==0){
-    increasePlayerHealth(); // adjust healthbar to maximum
-    currentPlayerHealth=choosenHealthValue; // adjust the current player health to maximum
-    tries --;   
-    removeBonusLife();
-    }else{
-        alert('no tries available');
+    // --- Visual feedback on the cart button (scale bounce) ---
+    if (cartBtn) {
+      cartBtn.classList.remove('cart-bounce');          // reset to allow re-trigger
+      // Force reflow so the animation restarts reliably.
+      void cartBtn.offsetWidth;
+      cartBtn.classList.add('cart-bounce');
     }
-}
-/* write the events */
- function writeEventLog(ev,tar,val1,monsHeal1,playHeal1){
-    let logEnteryDetails={
-        event: ev,
-        target:tar,
-        damageValue:val1,
-        monsterHealth:monsHeal1,
-        playerHealth:playHeal1,
-    };
-    logEnteryContent.push(logEnteryDetails);
- }
- 
-/* display game log */
- function eventLog(){
-    console.log(logEnteryContent);
- }
 
- 
+    // --- Visual feedback on the clicked button ("Added!" text) ---
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Added!';
+    btn.disabled = true;
 
-attackBtn.addEventListener('click', attackHandeler);
-strongAttackBtn.addEventListener('click', strongAttack);
-healBtn.addEventListener('click', anotherTry );
-logBtn.addEventListener('click',eventLog);
+    // Revert after ~1.2s.
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }, 1200);
+  });
+
+  /* CSS keyframes for the cart bounce are injected once so we don't
+     need to touch app.css. */
+  const bounceStyle = document.createElement('style');
+  bounceStyle.textContent = `
+    @keyframes cartBounce {
+      0%   { transform: scale(1); }
+      30%  { transform: scale(1.25); }
+      60%  { transform: scale(0.92); }
+      100% { transform: scale(1); }
+    }
+    .cart-bounce {
+      animation: cartBounce 0.4s ease;
+    }
+  `;
+  document.head.appendChild(bounceStyle);
+
+  /* =========================================================
+   * 4. SMOOTH SCROLL NAVIGATION
+   * Progressive enhancement: intercept clicks on in-page anchor
+   * links (`a[href^="#"]`) in the navbar and footer, then use
+   * scrollIntoView for smooth scrolling. Placeholder links with
+   * `href="#"` are skipped (no scroll, no preventDefault).
+   * ========================================================= */
+  const handleAnchorClick = (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+
+    // Skip placeholder links — let them behave naturally (no-op).
+    if (!href || href === '#') return;
+
+    const target = document.querySelector(href);
+    if (!target) return;
+
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Move focus to the target for keyboard / screen-reader users.
+    target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+  };
+
+  // Delegate on navbar and footer (covers nav links, hero CTAs, footer links).
+  const navbar = document.getElementById('navbar');
+  const footer = document.getElementById('contact');
+  if (navbar) navbar.addEventListener('click', handleAnchorClick);
+  if (footer) footer.addEventListener('click', handleAnchorClick);
+
+  // Also handle hero CTA buttons (they live in <main>, outside navbar/footer).
+  const hero = document.getElementById('home');
+  if (hero) hero.addEventListener('click', handleAnchorClick);
+
+  /* =========================================================
+   * 5. NEWSLETTER FORM VALIDATION
+   * The form has `novalidate`, so JS owns validation. On submit:
+   *   - Validate email with a simple regex.
+   *   - Invalid  → show error message + shake the input.
+   *   - Valid    → clear input, show success message.
+   * The message auto-hides after 5 seconds.
+   * ========================================================= */
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let messageTimeout = null;
+
+  const showMessage = (text, isError = false) => {
+    if (!newsletterMessage) return;
+
+    newsletterMessage.textContent = text;
+    newsletterMessage.classList.remove('hidden');
+
+    // Toggle an error class for potential styling (forward-compatible).
+    newsletterMessage.classList.toggle('newsletter-error', isError);
+
+    // Clear any pending auto-hide timer and set a fresh one.
+    if (messageTimeout) clearTimeout(messageTimeout);
+    messageTimeout = setTimeout(() => {
+      newsletterMessage.classList.add('hidden');
+      newsletterMessage.classList.remove('newsletter-error');
+    }, 5000);
+  };
+
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const email = newsletterEmail ? newsletterEmail.value.trim() : '';
+
+      if (!EMAIL_REGEX.test(email)) {
+        // Invalid email — show error and shake the input.
+        showMessage('⚠️ Please enter a valid email address.', true);
+
+        if (newsletterEmail) {
+          newsletterEmail.classList.remove('shake');
+          void newsletterEmail.offsetWidth; // force reflow to restart animation
+          newsletterEmail.classList.add('shake');
+          newsletterEmail.focus();
+        }
+        return;
+      }
+
+      // Valid email — show success and reset the form.
+      showMessage('🎉 Welcome to the Whisker Club! Check your inbox for your 10% off code.', false);
+      newsletterForm.reset();
+    });
+  }
+
+  // Inject shake keyframes (same rationale as the cart bounce).
+  const shakeStyle = document.createElement('style');
+  shakeStyle.textContent = `
+    @keyframes inputShake {
+      0%, 100% { transform: translateX(0); }
+      20%      { transform: translateX(-8px); }
+      40%      { transform: translateX(8px); }
+      60%      { transform: translateX(-6px); }
+      80%      { transform: translateX(6px); }
+    }
+    .shake {
+      animation: inputShake 0.4s ease;
+    }
+  `;
+  document.head.appendChild(shakeStyle);
+
+  /* =========================================================
+   * 6. DYNAMIC FOOTER YEAR
+   * Replace the placeholder year with the current year on load.
+   * ========================================================= */
+  if (currentYearEl) {
+    currentYearEl.textContent = String(new Date().getFullYear());
+  }
+
+  /* =========================================================
+   * 7. SCROLL SPY (optional enhancement)
+   * Uses IntersectionObserver to highlight the nav link whose
+   * target section is currently in view. Adds/removes the `active`
+   * class on the matching `.nav-link`. Lightweight and progressive.
+   * ========================================================= */
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinkEls = navLinks
+    ? navLinks.querySelectorAll('.nav-link')
+    : [];
+
+  if (sections.length > 0 && navLinkEls.length > 0 && 'IntersectionObserver' in window) {
+    const spyObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const id = entry.target.id;
+
+          // Remove `active` from all nav links, then add to the matching one.
+          navLinkEls.forEach((link) => {
+            const isActive = link.getAttribute('href') === `#${id}`;
+            link.classList.toggle('active', isActive);
+          });
+        });
+      },
+      {
+        // Trigger when the section's top crosses ~40% of the viewport.
+        rootMargin: '-40% 0px -55% 0px',
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => spyObserver.observe(section));
+  }
+});

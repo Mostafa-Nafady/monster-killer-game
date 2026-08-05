@@ -4,33 +4,351 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Monster Killer</title>
+    <meta
+      name="description"
+      content="Whisker & Co. — Premium cat accessories, toys, beds, and treats your feline will love. Free shipping on orders over $50."
+    />
+    <title>Whisker & Co. | Premium Cat Accessories</title>
     <link rel="stylesheet" href="assets/styles/app.css" />
-    <script src="assets/scripts/vendor.js" defer></script>
     <script src="assets/scripts/app.js" defer></script>
   </head>
   <body>
-    <section id="health-levels">
-      <h2>MONSTER HEALTH</h2>
-      <progress id="monster-health" max="100" value="100">100%</progress>
-      <h2>PLAYER HEALTH<span id="bonus-life">1</span></h2>
-      <progress id="player-health" max="100" value="100">100%</progress>
-    </section>
-    <section id="controls">
-      <button id="attack-btn">ATTACK</button>
-      <button id="strong-attack-btn">STRONG ATTACK</button>
-      <button id="heal-btn">HEAL</button>
-      <button id="log-btn">SHOW LOG</button>
-      <a href="about.html"><button>ABOUT</button></a>
-      <a href="sdv.html"><button>SDV</button></a>
-      <a href="yuy.html"><button>YUY</button></a>
-      <a href="asde.html"><button>ASDE</button></a>
-    </section>
-   <!--  <section>
-      <progress max="100" value="80">100%</progress>
-    </section> -->
+    <!-- ===================== NAVBAR ===================== -->
+    <header class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="#home" class="brand-logo" aria-label="Whisker and Co. home">
+          <span class="brand-emoji" aria-hidden="true">🐾</span>
+          <span class="brand-text">Whisker &amp; Co.</span>
+        </a>
+
+        <nav class="nav-links" id="nav-links" aria-label="Primary navigation">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#products" class="nav-link">Products</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#reviews" class="nav-link">Reviews</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button
+            class="cart-btn"
+            id="cart-btn"
+            aria-label="View shopping cart"
+          >
+            <span class="cart-icon" aria-hidden="true">🛒</span>
+            <span class="cart-count" id="cart-count">0</span>
+          </button>
+
+          <button
+            class="menu-toggle"
+            id="menu-toggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="nav-links"
+          >
+            <span class="menu-bar" aria-hidden="true"></span>
+            <span class="menu-bar" aria-hidden="true"></span>
+            <span class="menu-bar" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ===================== HERO ===================== -->
+      <section class="hero" id="home">
+        <div class="hero-content">
+          <p class="hero-badge">🐾 Premium Cat Accessories</p>
+          <h1 class="hero-title">
+            Spoil Your Furry Friend<br />
+            <span class="hero-title-accent">With the Best</span>
+          </h1>
+          <p class="hero-subtitle">
+            Hand-picked toys, cozy beds, and gourmet treats designed to keep
+            your cat purring with joy. Quality you can trust, prices you'll
+            love.
+          </p>
+          <div class="hero-cta">
+            <a href="#products" class="btn btn-primary">Shop Now</a>
+            <a href="#features" class="btn btn-secondary">Learn More</a>
+          </div>
+          <p class="hero-trust">
+            🚚 Free shipping on orders over $50 &nbsp;•&nbsp; ⭐ 10,000+ happy
+            cats
+          </p>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <span class="hero-cat-emoji">🐱</span>
+          <span class="hero-paw paw-1">🐾</span>
+          <span class="hero-paw paw-2">🐾</span>
+          <span class="hero-paw paw-3">🐾</span>
+        </div>
+      </section>
+
+      <!-- ===================== FEATURES ===================== -->
+      <section class="features section" id="features">
+        <div class="section-header">
+          <p class="section-eyebrow">Why Choose Us</p>
+          <h2 class="section-title">Everything Your Cat Deserves</h2>
+          <p class="section-subtitle">
+            We're obsessed with quality and your cat's happiness. Here's what
+            makes us the cat's meow.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🚚</div>
+            <h3 class="feature-title">Fast Shipping</h3>
+            <p class="feature-desc">
+              Free 2-day shipping on all orders over $50. Your cat won't have to
+              wait long for their new favorite thing.
+            </p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🐾</div>
+            <h3 class="feature-title">Premium Quality</h3>
+            <p class="feature-desc">
+              Every product is crafted from pet-safe, durable materials that
+              stand up to even the most enthusiastic play sessions.
+            </p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">💯</div>
+            <h3 class="feature-title">Satisfaction Guarantee</h3>
+            <p class="feature-desc">
+              Not happy within 30 days? Get a full refund — no questions asked.
+              Your cat's happiness is our mission.
+            </p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🎁</div>
+            <h3 class="feature-title">Free Gift Wrapping</h3>
+            <p class="feature-desc">
+              Sending a gift? We'll wrap it beautifully at no extra charge.
+              Perfect for the cat lover in your life.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================== PRODUCTS ===================== -->
+      <section class="products section" id="products">
+        <div class="section-header">
+          <p class="section-eyebrow">Our Collection</p>
+          <h2 class="section-title">Shop Cat Favorites</h2>
+          <p class="section-subtitle">
+            From playful toys to cozy naps, find everything your cat needs to
+            live their best life.
+          </p>
+        </div>
+        <div class="product-grid">
+          <article class="product-card">
+            <div class="product-emoji" aria-hidden="true">🧶</div>
+            <h3 class="product-name">Yarn Ball Toy</h3>
+            <div class="product-rating" aria-label="Rated 5 out of 5 stars">
+              <span class="stars" aria-hidden="true">★★★★★</span>
+              <span class="review-count">(124)</span>
+            </div>
+            <p class="product-price">$12.99</p>
+            <button class="add-to-cart-btn" data-product="Yarn Ball Toy">
+              Add to Cart
+            </button>
+          </article>
+
+          <article class="product-card">
+            <div class="product-emoji" aria-hidden="true">🐭</div>
+            <h3 class="product-name">Plush Mouse Toy</h3>
+            <div class="product-rating" aria-label="Rated 4 out of 5 stars">
+              <span class="stars" aria-hidden="true">★★★★☆</span>
+              <span class="review-count">(89)</span>
+            </div>
+            <p class="product-price">$8.49</p>
+            <button class="add-to-cart-btn" data-product="Plush Mouse Toy">
+              Add to Cart
+            </button>
+          </article>
+
+          <article class="product-card">
+            <div class="product-emoji" aria-hidden="true">🛏️</div>
+            <h3 class="product-name">Cozy Cat Bed</h3>
+            <div class="product-rating" aria-label="Rated 5 out of 5 stars">
+              <span class="stars" aria-hidden="true">★★★★★</span>
+              <span class="review-count">(312)</span>
+            </div>
+            <p class="product-price">$39.99</p>
+            <button class="add-to-cart-btn" data-product="Cozy Cat Bed">
+              Add to Cart
+            </button>
+          </article>
+
+          <article class="product-card">
+            <div class="product-emoji" aria-hidden="true">🍲</div>
+            <h3 class="product-name">Ceramic Food Bowl</h3>
+            <div class="product-rating" aria-label="Rated 5 out of 5 stars">
+              <span class="stars" aria-hidden="true">★★★★★</span>
+              <span class="review-count">(67)</span>
+            </div>
+            <p class="product-price">$15.99</p>
+            <button class="add-to-cart-btn" data-product="Ceramic Food Bowl">
+              Add to Cart
+            </button>
+          </article>
+
+          <article class="product-card">
+            <div class="product-emoji" aria-hidden="true">🐱</div>
+            <h3 class="product-name">Scratching Post</h3>
+            <div class="product-rating" aria-label="Rated 4 out of 5 stars">
+              <span class="stars" aria-hidden="true">★★★★☆</span>
+              <span class="review-count">(156)</span>
+            </div>
+            <p class="product-price">$29.99</p>
+            <button class="add-to-cart-btn" data-product="Scratching Post">
+              Add to Cart
+            </button>
+          </article>
+
+          <article class="product-card">
+            <div class="product-emoji" aria-hidden="true">🎀</div>
+            <h3 class="product-name">Breakaway Collar</h3>
+            <div class="product-rating" aria-label="Rated 5 out of 5 stars">
+              <span class="stars" aria-hidden="true">★★★★★</span>
+              <span class="review-count">(98)</span>
+            </div>
+            <p class="product-price">$11.99</p>
+            <button class="add-to-cart-btn" data-product="Breakaway Collar">
+              Add to Cart
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================== TESTIMONIALS ===================== -->
+      <section class="testimonials section" id="reviews">
+        <div class="section-header">
+          <p class="section-eyebrow">Happy Customers</p>
+          <h2 class="section-title">What Cat Parents Are Saying</h2>
+          <p class="section-subtitle">
+            Don't just take our word for it — hear from the humans behind the
+            happy cats.
+          </p>
+        </div>
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <div class="testimonial-avatar" aria-hidden="true">🐱</div>
+            <blockquote class="testimonial-quote">
+              "My cat Luna is OBSESSED with the yarn ball toy. She carries it
+              everywhere! Best $13 I've ever spent."
+            </blockquote>
+            <p class="testimonial-name">— Sarah M.</p>
+          </article>
+          <article class="testimonial-card">
+            <div class="testimonial-avatar" aria-hidden="true">😺</div>
+            <blockquote class="testimonial-quote">
+              "The cozy cat bed is incredibly well made. My grumpy old tomcat
+              finally stopped sleeping on my keyboard. Thank you!"
+            </blockquote>
+            <p class="testimonial-name">— James T.</p>
+          </article>
+          <article class="testimonial-card">
+            <div class="testimonial-avatar" aria-hidden="true">🐈</div>
+            <blockquote class="testimonial-quote">
+              "Fast shipping, beautiful packaging, and my two cats fight over
+              the scratching post every single day. Highly recommend!"
+            </blockquote>
+            <p class="testimonial-name">— Priya K.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================== NEWSLETTER ===================== -->
+      <section class="newsletter section" id="newsletter">
+        <div class="newsletter-inner">
+          <h2 class="section-title">Join the Whisker Club 🐾</h2>
+          <p class="newsletter-text">
+            Subscribe for exclusive deals, new product alerts, and cat care tips
+            delivered straight to your inbox. Plus, get 10% off your first
+            order!
+          </p>
+          <form class="newsletter-form" id="newsletter-form" novalidate>
+            <input
+              type="email"
+              id="newsletter-email"
+              class="newsletter-input"
+              placeholder="Enter your email address"
+              required
+              aria-label="Email address"
+            />
+            <button
+              type="submit"
+              id="newsletter-submit"
+              class="btn btn-primary newsletter-submit"
+            >
+              Subscribe
+            </button>
+          </form>
+          <p class="newsletter-message hidden" id="newsletter-message" role="status" aria-live="polite">
+            🎉 Welcome to the Whisker Club! Check your inbox for your 10% off
+            code.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer" id="contact">
+      <div class="footer-container">
+        <div class="footer-col footer-brand">
+          <a href="#home" class="brand-logo footer-brand-logo">
+            <span class="brand-emoji" aria-hidden="true">🐾</span>
+            <span class="brand-text">Whisker &amp; Co.</span>
+          </a>
+          <p class="footer-tagline">
+            Premium cat accessories for the discerning feline. Made with love,
+            shipped with care.
+          </p>
+          <div class="footer-social" aria-label="Social media links">
+            <a href="#" class="social-link" aria-label="Follow us on Twitter">🐦</a>
+            <a href="#" class="social-link" aria-label="Follow us on Instagram">📷</a>
+            <a href="#" class="social-link" aria-label="Like us on Facebook">👍</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home" class="footer-link">Home</a></li>
+            <li><a href="#products" class="footer-link">Products</a></li>
+            <li><a href="#features" class="footer-link">Features</a></li>
+            <li><a href="#reviews" class="footer-link">Reviews</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Shipping Info</a></li>
+            <li><a href="#" class="footer-link">Returns</a></li>
+            <li><a href="#" class="footer-link">FAQ</a></li>
+            <li><a href="#" class="footer-link">Track Order</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Get in Touch</h4>
+          <ul class="footer-contact">
+            <li>📧 hello@whiskerandco.com</li>
+            <li>📞 1-800-WHISKERS</li>
+            <li>📍 123 Purrington Ave,<br />Catville, CA 90210</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year">2025</span> Whisker &amp; Co. All rights reserved. Made with 🐾 for cats everywhere.</p>
+      </div>
+    </footer>
   </body>
 </html>
+
 
 
 
